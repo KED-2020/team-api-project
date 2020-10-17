@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 require 'http'
 require 'yaml'
@@ -60,12 +60,12 @@ puts api_results['album_name']
 puts
 
 
-lyric = call_musixmatch(
+lyrics_get = call_musixmatch(
   'track.lyrics.get', 
   { track_id: track['track_id'] }
 )
 
-api_results['lyrics_body'] = lyric['body']['lyrics']['lyrics_body'] # Whores in this house
+api_results['lyrics_body'] = lyrics_get['body']['lyrics']['lyrics_body'] # Whores in this house
 
 puts 'lyrics_body:'
 puts api_results['lyrics_body']
