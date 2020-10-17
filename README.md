@@ -5,11 +5,18 @@ Project to gather useful information from MusixMatch API V 1.1. The base URL is 
 ## Resources
 
 * Songs
-* Lyrics
 * Artists
 * Albums
+* Lyrics
 
 ## Elements
+
+* Songs
+  - song_id
+  - name
+  - year
+  - artist_id
+  - lyrics_id
 
 * Artists
   - artist_id
@@ -23,13 +30,6 @@ Project to gather useful information from MusixMatch API V 1.1. The base URL is 
   - year
   - artist_id
 
-* Songs
-  - song_id
-  - name
-  - year
-  - artist_id
-  - lyrics_id
-
 * Lyrics
   - lyric_id
   - song_id
@@ -40,8 +40,21 @@ Project to gather useful information from MusixMatch API V 1.1. The base URL is 
 ## Entities
 
 * Songs (the source of the lyrics i.e. what the lyrics are highlighting)
-* Lyrics (a songs lyrics and translations of the lyrics)
 * Artists (the creator of the songs)
-* Album (a collection of songs)
+* Albums (a collection of songs)
+* Lyrics (a songs lyrics and translations of the lyrics)
 
-## API endpoints for important entities
+
+
+## Get Started
+
+* Installation
+  * `rbenv local 2.7.1`
+  * `bundle install`
+* Authentication
+  * Put your ACCESS_TOKEN into config/secrets.yml
+* Generate testfile (spec/fixtures/musixmatch_results.yml)
+  * `$ bundle exec ruby lib/musixmatch_api_info.rb`
+* Test the APIs
+  * `$ bundle exec ruby spec/musixmatch_api_spec.rb`
+
