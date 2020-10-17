@@ -1,6 +1,6 @@
 # MusixMatch API Client
 
-Project to gather useful information from MusixMatch API.
+Project to gather useful information from MusixMatch API V 1.1. The base URL is `https://api.musixmatch.com/ws/1.1/`
 
 ## Resources
 
@@ -43,3 +43,5 @@ Project to gather useful information from MusixMatch API.
 * Lyrics (a songs lyrics and translations of the lyrics)
 * Artists (the creator of the songs)
 * Album (a collection of songs)
+
+## API endpoints for important entities
