@@ -2,6 +2,7 @@
 
 Project to gather useful information from MusixMatch API V 1.1. The base URL is `https://api.musixmatch.com/ws/1.1/`
 
+
 ## Resources
 
 * Songs
@@ -9,41 +10,20 @@ Project to gather useful information from MusixMatch API V 1.1. The base URL is 
 * Albums
 * Lyrics
 
+
 ## Elements
 
 * Songs
-  - song_id
-  - name
-  - year
-  - artist_id
-  - lyrics_id
+  - track name
+  - artist name
+  - album name
+  - lyric body
 
-* Artists
-  - artist_id
-  - name
-  - albums
-  - songs
-
-* Albums
-  - album_id
-  - name
-  - year
-  - artist_id
-
-* Lyrics
-  - lyric_id
-  - song_id
-  - text
-  - whether its a translation translation
-  - language
 
 ## Entities
 
-* Songs (the source of the lyrics i.e. what the lyrics are highlighting)
-* Artists (the creator of the songs)
-* Albums (a collection of songs)
-* Lyrics (a songs lyrics and translations of the lyrics)
-
+* SongTrack 
+* SongLyric 
 
 
 ## Get Started
