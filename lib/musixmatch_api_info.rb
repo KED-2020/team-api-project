@@ -2,6 +2,7 @@
 
 require 'http'
 require 'yaml'
+require 'fileutils'
 
 ####################################
 ## API
@@ -85,4 +86,5 @@ puts
 ####################################
 ## Write Testing File
 ####################################
+FileUtils.mkdir_p(__dir__+"/../spec/fixtures")
 File.write(__dir__+'/../spec/fixtures/musixmatch_results.yml', api_results.to_yaml)
