@@ -2,46 +2,39 @@
 
 Project to gather useful information from MusixMatch API V 1.1. The base URL is `https://api.musixmatch.com/ws/1.1/`
 
+
 ## Resources
 
 * Songs
-* Lyrics
 * Artists
 * Albums
+* Lyrics
+
 
 ## Elements
 
-* Artists
-  - artist_id
-  - name
-  - albums
-  - songs
-
-* Albums
-  - album_id
-  - name
-  - year
-  - artist_id
-
 * Songs
-  - song_id
-  - name
-  - year
-  - artist_id
-  - lyrics_id
+  - track name
+  - artist name
+  - album name
+  - lyric body
 
-* Lyrics
-  - lyric_id
-  - song_id
-  - text
-  - whether its a translation translation
-  - language
 
 ## Entities
 
-* Songs (the source of the lyrics i.e. what the lyrics are highlighting)
-* Lyrics (a songs lyrics and translations of the lyrics)
-* Artists (the creator of the songs)
-* Album (a collection of songs)
+* SongTrack 
+* SongLyric 
 
-## API endpoints for important entities
+
+## Get Started
+
+* Installation
+  * `$ rbenv local 2.7.1`
+  * `$ bundle install`
+* API Authentication
+  * Put your ACCESS_TOKEN into `config/secrets.yml`
+* Generate testfile (`spec/fixtures/musixmatch_results.yml`)
+  * `$ bundle exec ruby lib/musixmatch_api_info.rb`
+* Test the APIs
+  * `$ bundle exec ruby spec/musixmatch_api_spec.rb`
+

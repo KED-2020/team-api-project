@@ -1,50 +1,90 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 require 'http'
 require 'yaml'
+require 'fileutils'
 
-ACCESS_TOKEN = YAML.safe_load(File.read('config/secrets.yml'))['ACCESS_TOKEN']
-
+####################################
+## API
+####################################
 def call_musixmatch(path, params = {})
   response = JSON.parse(
     HTTP
     .headers("Content-Type": 'application/json')
     .get(
       "https://api.musixmatch.com/ws/1.1/#{path}",
-      params: params.merge({ "apikey": ACCESS_TOKEN, format: 'json' })
+      params: params.merge({ "apikey": MUSIXMATCH_TOKEN, format: 'json' })
     ).body
   )
 
   response['message']
 end
 
-api_response = {}
+####################################
+## Configuration
+####################################
+TRACK_NAME = 'Little Monkey Rides on the Little Donkey'.freeze
+MUSIXMATCH_TOKEN = YAML.safe_load(File.read(__dir__+'/../config/secrets.yml'))['ACCESS_TOKEN']
+api_results = {}
 
-api_response['search'] = call_musixmatch('track.search', { q_track: 'WAP (feat. Megan Thee Stallion)' })
-track = api_response['search']['body']['track_list'][0]['track']
+####################################
+## HAPPY project request
+####################################
+puts 'Start HTTP requests...'
+puts
 
-api_response['artist'] = call_musixmatch('artist.get', { artist_id: track['artist_id'] })
-artist = api_response['artist']['body']['artist']
+search = call_musixmatch(
+  'track.search',
+  { q_track: TRACK_NAME }
+)
 
-api_response['lyrics'] = call_musixmatch('track.lyrics.get', { track_id: track['track_id'] })
-lyrics = api_response['lyrics']['body']['lyrics']
+# By default, find the 1st search result
+track = search['body']['track_list'][0]['track']
 
+api_results['track_name'] = track['track_name'] # WAP (feat. Megan Thee Stallion)
+api_results['artist_name'] = track['artist_name'] # Cardi B feat. Megan Thee Stallion
+api_results['album_name'] = track['album_name'] # WAP (feat. Megan Thee Stallion)
+
+puts 'track_name:'
+puts api_results['track_name']
+puts
+
+puts 'artist_name:'
+puts api_results['artist_name']
+puts
+
+puts 'album_name:'
+puts api_results['album_name']
+puts
+
+lyrics_get = call_musixmatch(
+  'track.lyrics.get',
+  { track_id: track['track_id'] }
+)
+
+api_results['lyrics_body'] = lyrics_get['body']['lyrics']['lyrics_body'] # Whores in this house
+
+puts 'lyrics_body:'
+puts api_results['lyrics_body']
+puts
+
+####################################
+## BAD project request
+####################################
 # This calls the translation API but a 403 is returned since we don't have access to this part of the API.
-api_response['translation'] = call_musixmatch(
+translation = call_musixmatch(
   'track.lyrics.translation.get',
   { selected_language: 'es', track_id: track['track_id'] }
 )
-translation = api_response['translation']['header']['hint']
 
-api_response['album'] = call_musixmatch('album.get', { album_id: track['album_id'] })
-album = api_response['album']['body']['album']
+api_results['translation'] = translation['header']['hint'] # translations not enabled on this plan
 
-api_results = {
-  track: track,
-  artist: artist,
-  lyrics: lyrics,
-  album: album,
-  translation: translation
-}
+puts 'translation:'
+puts api_results['translation']
+puts
 
-File.write('spec/fixtures/musixmatch_results.yml', api_results.to_yaml)
+####################################
+## Write Testing File
+####################################
+FileUtils.mkdir_p(__dir__+"/../spec/fixtures")
+File.write(__dir__+'/../spec/fixtures/musixmatch_results.yml', api_results.to_yaml)
