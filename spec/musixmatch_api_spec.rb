@@ -5,7 +5,7 @@ require 'minitest/rg'
 require 'yaml'
 require_relative '../lib/musixmatch_api'
 
-TRACK_NAME = 'WAP (feat. Megan Thee Stallion)'
+TRACK_NAME = 'WAP (feat. Megan Thee Stallion)'.freeze
 MUSIXMATCH_TOKEN = YAML.safe_load(File.read('config/secrets.yml'))['ACCESS_TOKEN']
 CORRECT = YAML.safe_load(File.read('spec/fixtures/musixmatch_results.yml'))
 
@@ -29,5 +29,4 @@ describe 'Tests Musixmatch API library' do
   it 'HAPPY: should identify lyrics_body' do
     _(@musixmatch_api.song_lyric(TRACK_NAME).lyrics_body).must_equal CORRECT['lyrics_body']
   end
-
 end

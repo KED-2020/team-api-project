@@ -19,15 +19,12 @@ def call_musixmatch(path, params = {})
   response['message']
 end
 
-
 ####################################
 ## Configuration
 ####################################
-TRACK_NAME = 'WAP (feat. Megan Thee Stallion)'
+TRACK_NAME = 'WAP (feat. Megan Thee Stallion)'.freeze
 MUSIXMATCH_TOKEN = YAML.safe_load(File.read('config/secrets.yml'))['ACCESS_TOKEN']
 api_results = {}
-
-
 
 ####################################
 ## HAPPY project request
@@ -36,11 +33,11 @@ puts 'Start HTTP requests...'
 puts
 
 search = call_musixmatch(
-  'track.search', 
-  { q_track: TRACK_NAME}
+  'track.search',
+  { q_track: TRACK_NAME }
 )
 
-# By default, find the 1st search result 
+# By default, find the 1st search result
 track = search['body']['track_list'][0]['track']
 
 api_results['track_name'] = track['track_name'] # WAP (feat. Megan Thee Stallion)
@@ -59,9 +56,8 @@ puts 'album_name:'
 puts api_results['album_name']
 puts
 
-
 lyrics_get = call_musixmatch(
-  'track.lyrics.get', 
+  'track.lyrics.get',
   { track_id: track['track_id'] }
 )
 
@@ -70,8 +66,6 @@ api_results['lyrics_body'] = lyrics_get['body']['lyrics']['lyrics_body'] # Whore
 puts 'lyrics_body:'
 puts api_results['lyrics_body']
 puts
-
-
 
 ####################################
 ## BAD project request
@@ -85,11 +79,8 @@ translation = call_musixmatch(
 api_results['translation'] = translation['header']['hint'] # translations not enabled on this plan
 
 puts 'translation:'
-puts api_results['translation'] 
+puts api_results['translation']
 puts
-
-
-
 
 ####################################
 ## Write Testing File
