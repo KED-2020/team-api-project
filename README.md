@@ -29,11 +29,11 @@ Project to gather useful information from MusixMatch API V 1.1. The base URL is 
 ## Get Started
 
 * Installation
-  * `rbenv local 2.7.1`
-  * `bundle install`
-* Authentication
-  * Put your ACCESS_TOKEN into config/secrets.yml
-* Generate testfile (spec/fixtures/musixmatch_results.yml)
+  * `$ rbenv local 2.7.1`
+  * `$ bundle install`
+* API Authentication
+  * Put your ACCESS_TOKEN into `config/secrets.yml`
+* Generate testfile (`spec/fixtures/musixmatch_results.yml`)
   * `$ bundle exec ruby lib/musixmatch_api_info.rb`
 * Test the APIs
   * `$ bundle exec ruby spec/musixmatch_api_spec.rb`
