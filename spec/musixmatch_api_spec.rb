@@ -29,4 +29,8 @@ describe 'Tests Musixmatch API library' do
   it 'HAPPY: should identify lyrics_body' do
     _(@musixmatch_api.song_lyric(TRACK_NAME).lyrics_body).must_equal CORRECT['lyrics_body']
   end
+
+  it 'SAD: should notify the user that translations are not supported' do
+    _(@musixmatch_api.song_lyric_translation(TRACK_NAME, 'es')).must_equal 'translations not enabled on this plan'
+  end
 end

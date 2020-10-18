@@ -7,6 +7,10 @@ module Musixmatch
       @track = track_data
     end
 
+    def track_id
+      @track['track_id']
+    end
+
     def track_name
       @track['track_name']
     end
