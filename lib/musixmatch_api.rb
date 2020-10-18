@@ -18,10 +18,9 @@ module Musixmatch
     end
 
     def song_lyric(track_name)
-      search = call_musixmatch('track.search', { q_track: track_name })
-      track = search['body']['track_list'][0]['track']
+      track = song_track(track_name)
 
-      lyrics_get = call_musixmatch('track.lyrics.get', { track_id: track['track_id'] })
+      lyrics_get = call_musixmatch('track.lyrics.get', { track_id: track.track_id })
 
       SongLyric.new(lyrics_get['body']['lyrics'])
     end
@@ -29,8 +28,7 @@ module Musixmatch
     def song_lyric_translation(track_name, language)
       track = song_track(track_name)
 
-      response = call_musixmatch('track.lyrics.translation.get',
-                                 { track_id: track.track_id, selected_language: language })
+      response = call_musixmatch('track.lyrics.translation.get', { track_id: track.track_id, selected_language: language })
 
       return response['header']['hint'] if response['status_code'] != 200
 
