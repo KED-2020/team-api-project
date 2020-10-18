@@ -6,8 +6,8 @@ require 'yaml'
 require_relative '../lib/musixmatch_api'
 
 TRACK_NAME = 'Little Monkey Rides on the Little Donkey'.freeze
-MUSIXMATCH_TOKEN = YAML.safe_load(File.read('config/secrets.yml'))['ACCESS_TOKEN']
-CORRECT = YAML.safe_load(File.read('spec/fixtures/musixmatch_results.yml'))
+MUSIXMATCH_TOKEN = YAML.safe_load(File.read(__dir__+'/../config/secrets.yml'))['ACCESS_TOKEN']
+CORRECT = YAML.safe_load(File.read(__dir__+'/../spec/fixtures/musixmatch_results.yml'))
 
 describe 'Tests Musixmatch API library' do
   before do

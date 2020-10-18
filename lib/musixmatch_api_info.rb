@@ -23,7 +23,7 @@ end
 ## Configuration
 ####################################
 TRACK_NAME = 'Little Monkey Rides on the Little Donkey'.freeze
-MUSIXMATCH_TOKEN = YAML.safe_load(File.read('config/secrets.yml'))['ACCESS_TOKEN']
+MUSIXMATCH_TOKEN = YAML.safe_load(File.read(__dir__+'/../config/secrets.yml'))['ACCESS_TOKEN']
 api_results = {}
 
 ####################################
@@ -85,4 +85,4 @@ puts
 ####################################
 ## Write Testing File
 ####################################
-File.write('spec/fixtures/musixmatch_results.yml', api_results.to_yaml)
+File.write(__dir__+'/../spec/fixtures/musixmatch_results.yml', api_results.to_yaml)
