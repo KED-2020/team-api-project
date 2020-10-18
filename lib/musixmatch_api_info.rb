@@ -22,7 +22,7 @@ end
 ####################################
 ## Configuration
 ####################################
-TRACK_NAME = 'WAP (feat. Megan Thee Stallion)'.freeze
+TRACK_NAME = 'Little Monkey Rides on the Little Donkey'.freeze
 MUSIXMATCH_TOKEN = YAML.safe_load(File.read('config/secrets.yml'))['ACCESS_TOKEN']
 api_results = {}
 

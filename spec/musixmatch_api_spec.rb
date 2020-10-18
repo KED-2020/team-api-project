@@ -5,7 +5,7 @@ require 'minitest/rg'
 require 'yaml'
 require_relative '../lib/musixmatch_api'
 
-TRACK_NAME = 'WAP (feat. Megan Thee Stallion)'.freeze
+TRACK_NAME = 'Little Monkey Rides on the Little Donkey'.freeze
 MUSIXMATCH_TOKEN = YAML.safe_load(File.read('config/secrets.yml'))['ACCESS_TOKEN']
 CORRECT = YAML.safe_load(File.read('spec/fixtures/musixmatch_results.yml'))
 
